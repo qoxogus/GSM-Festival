@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hariboGCS/Back/src/rest"
+	"github.com/qoxogus/GSM-Festival-Master-Back/rest"
 )
 
 func main() {
