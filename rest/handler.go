@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	dblayer "github.com/hariboGCS/Back/src/dbconn"
-	"github.com/hariboGCS/Back/src/model"
 	"github.com/labstack/echo"
+	dblayer "github.com/qoxogus/GSM-Festival-Master-Back/dbconn"
+	"github.com/qoxogus/GSM-Festival-Master-Back/model"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -24,10 +24,12 @@ type handlerInterface interface {
 	GetComplaints(c echo.Context)
 }
 
+//Get mainpage
 func GetMainPage(c echo.Context) (err error) {
 	return c.String(200, "main page")
 }
 
+//Get signup
 func Signup(c echo.Context) (err error) {
 	// Bind
 	u := &model.User{ID: bson.NewObjectId().Hex()}
@@ -48,6 +50,7 @@ func Signup(c echo.Context) (err error) {
 	return c.JSON(http.StatusCreated, u)
 }
 
+//Get signin
 func Signin(c echo.Context) (err error) {
 	// Bind
 	u := new(model.User)
