@@ -26,19 +26,21 @@ type handlerInterface interface {
 
 //Get mainpage
 func GetMainPage(c echo.Context) (err error) {
+	// return c.String(200, "main page")
 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
 }
 
-//Get signup
+//Get signup page
 func Signup(c echo.Context) (err error) {
-	//Bind
+	// Bind
 	u := &model.User{ID: bson.NewObjectId().Hex()}
 	if err = c.Bind(u); err != nil {
 		return err
 	}
 	// Validate
-	if u.Email == "" || u.Password == "" {
+	if u.Email == "" || u.Password == "" { //현재 비어있음
 		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "invalid email or password"}
+		// return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
 	}
 	collection, err := dblayer.GetDBCollection()
 	collection.InsertOne(context.TODO(), u)
@@ -50,9 +52,9 @@ func Signup(c echo.Context) (err error) {
 	return c.JSON(http.StatusCreated, u)
 }
 
-//Get signin
+//Get signin page
 func Signin(c echo.Context) (err error) {
-	//Bind
+	// Bind
 	u := new(model.User)
 	if err = c.Bind(u); err != nil {
 		return
@@ -83,3 +85,13 @@ func Signin(c echo.Context) (err error) {
 	u.Password = "" // Don't send password
 	return c.JSON(http.StatusOK, u)
 }
+
+// //LoginPage
+// func Mainpage(c echo.Context) (err error) {
+// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
+// }
+
+// //Loginpage
+// func Loginpage(c echo.Context) (err error) {
+// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
+// }

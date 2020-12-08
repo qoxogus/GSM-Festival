@@ -22,6 +22,6 @@ func GetDBCollection() (*mongo.Collection, error) {
 	if err != nil {
 		return nil, err
 	}
-	collection := client.Database("Ass").Collection("users")
+	collection := client.Database("GPM").Collection("users")
 	return collection, nil
 }
