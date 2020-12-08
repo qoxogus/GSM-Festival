@@ -13,7 +13,7 @@ func signup(c echo.Context) error {
 	fmt.Println(c.FormValue("myemail"))
 	fmt.Println(c.FormValue("pwd"))
 	fmt.Println(c.FormValue("pwdck"))
-	return c.File("C:/Users/user/go/src/Gsmfestival-Master/signup.html")
+	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
 }
 
 func main() {
@@ -21,6 +21,6 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Static(tmp))
 	e.POST("/signup", signup)
-	e.Logger.Fatal(e.Start(":1324"))
+	e.Logger.Fatal(e.Start(":1325"))
 
 }

@@ -7,8 +7,10 @@ import (
 
 //RunAPI used in main.go
 func RunAPI(address string) {
+	tmp := "C:/Users/user/go/src/Gsmfestival-Master"
 	e := echo.New()
 	e.Use(middleware.Logger())
+	e.Use(middleware.Static(tmp))
 	e.GET("/", GetMainPage) //서버 검사
 	e.POST("/signup", Signup)
 	e.POST("/signin", Signin)
