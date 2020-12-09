@@ -26,7 +26,8 @@ type handlerInterface interface {
 
 //Get mainpage
 func GetMainPage(c echo.Context) (err error) {
-	return c.String(200, "main page")
+	// return c.String(200, "main page")
+	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
 }
 
 //Get signup page
@@ -36,15 +37,20 @@ func Signup(c echo.Context) (err error) {
 	if err = c.Bind(u); err != nil {
 		return err
 	}
-	// Validate
-	if u.Email == "" || u.Password == "" {
-		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "invalid email or password"}
-	}
+
 	collection, err := dblayer.GetDBCollection()
 	collection.InsertOne(context.TODO(), u)
 	if err != nil {
 		return err
 	}
+
+	// Validate
+	if u.Email == "" || u.Password == "" { //현재 비어있음
+		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "invalid email or password"}
+	} else {
+		return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
+	}
+
 	defer collection.Database().Client().Disconnect(context.TODO())
 
 	return c.JSON(http.StatusCreated, u)
@@ -83,3 +89,13 @@ func Signin(c echo.Context) (err error) {
 	u.Password = "" // Don't send password
 	return c.JSON(http.StatusOK, u)
 }
+
+// //LoginPage
+// func Mainpage(c echo.Context) (err error) {
+// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
+// }
+
+// //Loginpage
+// func Loginpage(c echo.Context) (err error) {
+// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
+// }
