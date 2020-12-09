@@ -37,20 +37,17 @@ func Signup(c echo.Context) (err error) {
 	if err = c.Bind(u); err != nil {
 		return err
 	}
-
 	collection, err := dblayer.GetDBCollection()
 	collection.InsertOne(context.TODO(), u)
 	if err != nil {
 		return err
 	}
-
 	// Validate
-	if u.Email == "" || u.Password == "" { //현재 비어있음
+	if u.Email == "" || u.Password == "" {
 		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "invalid email or password"}
 	} else {
 		return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
 	}
-
 	defer collection.Database().Client().Disconnect(context.TODO())
 
 	return c.JSON(http.StatusCreated, u)
