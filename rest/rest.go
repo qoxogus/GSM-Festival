@@ -11,10 +11,8 @@ func RunAPI(address string) {
 	e := echo.New()
 	// e.Use(middleware.Logger())
 	e.Use(middleware.Static(tmp))
-	e.GET("/", GetMainPage) //서버 검사
-	// e.POST("/mainpage", Mainpage)
-	// e.POST("/loginpage", Loginpage)
-	e.POST("/signup", Signup)
-	e.POST("/signin", Signin)
+	e.GET("/", GetMainPage)          //서버 검사
+	e.POST("/signupsuccess", Signup) //회원정보 insert
+	// e.POST("/signin", Signin)
 	e.Logger.Fatal(e.Start(address))
 }
