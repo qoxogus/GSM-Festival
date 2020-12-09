@@ -86,13 +86,3 @@ func Signin(c echo.Context) (err error) {
 	u.Password = "" // Don't send password
 	return c.JSON(http.StatusOK, u)
 }
-
-// //LoginPage
-// func Mainpage(c echo.Context) (err error) {
-// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
-// }
-
-// //Loginpage
-// func Loginpage(c echo.Context) (err error) {
-// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
-// }
