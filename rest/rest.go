@@ -13,7 +13,7 @@ func RunAPI(address string) {
 	e.Use(middleware.Static(tmp))
 	e.GET("/", GetMainPage)          //서버 검사
 	e.POST("/signupsuccess", Signup) //회원정보 insert
-	// e.POST("/signin", Signin)
+	// e.POST("/signinsuccess", Signin)
 	e.Logger.Fatal(e.Start(address))
 }
 
