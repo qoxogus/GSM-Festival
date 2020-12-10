@@ -7,7 +7,7 @@ import (
 
 //RunAPI used in main.go
 func RunAPI(address string) {
-	tmp := "C:/Users/user/go/src/Gsmfestival-Master"
+	tmp := "C:/Users/user/go/src/Gsmfestival-Master-Front"
 	e := echo.New()
 	// e.Use(middleware.Logger())
 	e.Static("/", "static")

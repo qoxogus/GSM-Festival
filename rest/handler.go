@@ -27,7 +27,7 @@ type handlerInterface interface {
 //Get main Get
 func GetMainPage(c echo.Context) (err error) {
 	// return c.String(200, "main page")
-	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
+	return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/index.html")
 }
 
 //Login Get
@@ -54,7 +54,7 @@ func Signup(c echo.Context) (err error) {
 	if u.Email == "" || u.Password == "" {
 		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "invalid email or password"}
 	} else {
-		return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
+		return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/login.html")
 	}
 	defer collection.Database().Client().Disconnect(context.TODO())
 
