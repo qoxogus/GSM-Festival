@@ -83,7 +83,7 @@ func Signin(c echo.Context) (err error) {
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
 	claims["id"] = u.ID
-	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+	claims["exp"] = time.Now().Add(time.Hour * 1).Unix()
 
 	// Generate encoded token and send it as response
 	u.Token, err = token.SignedString([]byte("secret"))
@@ -93,4 +93,5 @@ func Signin(c echo.Context) (err error) {
 
 	u.Password = "" // Don't send password
 	return c.JSON(http.StatusOK, u)
+	// return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/index.html")
 }
