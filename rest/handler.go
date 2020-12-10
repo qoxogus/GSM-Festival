@@ -24,13 +24,21 @@ type handlerInterface interface {
 	GetComplaints(c echo.Context)
 }
 
-//Get mainpage
+//Get main Get
 func GetMainPage(c echo.Context) (err error) {
 	// return c.String(200, "main page")
 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
 }
 
-//Get signup page
+//Login Get
+// func Loginpage(c echo.Context) (err error) {
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
+// }
+
+//Get signup Get
 func Signup(c echo.Context) (err error) {
 	// Bind
 	u := &model.User{ID: bson.NewObjectId().Hex()}
