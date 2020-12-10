@@ -14,7 +14,7 @@ func RunAPI(address string) {
 	e.Use(middleware.Static(tmp))
 	e.GET("/", GetMainPage)      //서버 검사
 	e.POST("/loginpage", Signup) //회원정보 insert
-	// e.POST("/signinsuccess", Signin)
+	e.POST("/mainpage", Signin)
 	e.Logger.Fatal(e.Start(address))
 }
 
