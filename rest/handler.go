@@ -95,3 +95,5 @@ func Signin(c echo.Context) (err error) {
 	return c.JSON(http.StatusOK, u)
 	// return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/index.html")
 }
+
+// 공부
