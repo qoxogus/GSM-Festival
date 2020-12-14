@@ -56,7 +56,8 @@ func Signup(c echo.Context) (err error) {
 	} else {
 		return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/login.html")
 	}
-	defer collection.Database().Client().Disconnect(context.TODO())
+
+	defer collection.Database().Client().Disconnect(context.TODO()) //가장 마지막에 호출 DB연결 끊기
 
 	return c.JSON(http.StatusCreated, u)
 }
