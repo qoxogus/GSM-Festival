@@ -11,17 +11,20 @@ import (
 func GetDBCollection() (*mongo.Collection, error) {
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 
-	// Connect to MongoDB
+	// Connect to MongoDB (연결)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		return nil, err
 	}
-	// Check the connection
 
+	// Check the connection(연결검증)
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
 		return nil, err
 	}
+
+	// GPM.users DataBase     MongoDB
 	collection := client.Database("GPM").Collection("users")
+
 	return collection, nil
 }

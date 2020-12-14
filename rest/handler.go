@@ -35,7 +35,7 @@ func GetMainPage(c echo.Context) (err error) {
 // 	if err != nil {
 // 		return err
 // 	}
-// 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/login.html")
+// 	return c.Render(http.StatusOK, )
 // }
 
 //Get signup Get
@@ -64,10 +64,11 @@ func Signup(c echo.Context) (err error) {
 //Get signin page
 func Signin(c echo.Context) (err error) {
 	// Bind
-	u := new(model.User)
+	u := new(model.User) //user 불러오기
 	if err = c.Bind(u); err != nil {
 		return
 	}
+
 	filter := bson.M{"token": u.Token}
 	collection, err := dblayer.GetDBCollection()
 	if err != nil {
@@ -75,8 +76,11 @@ func Signin(c echo.Context) (err error) {
 		// return &echo.HTTPError{Code: http.StatusUnauthorized,Message:"invalid email or password"}
 	}
 	err = collection.FindOne(context.TODO(), filter).Decode(&u)
+
 	_, err = collection.UpdateOne(context.TODO(), filter, &u)
+
 	defer collection.Database().Client().Disconnect(context.TODO())
+
 	// Create token
 	token := jwt.New(jwt.SigningMethodHS256)
 
@@ -92,6 +96,7 @@ func Signin(c echo.Context) (err error) {
 	}
 
 	u.Password = "" // Don't send password
+
 	return c.JSON(http.StatusOK, u)
 	// return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/index.html")
 }
