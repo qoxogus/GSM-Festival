@@ -13,15 +13,11 @@ import (
 )
 
 type handlerInterface interface {
-	GetScore(c echo.Context)
-	ReceiveScore(c echo.Context)
 	Login(c echo.Context) error
 	Signup(c echo.Context) error
 	updateUser(c echo.Context) error
 	SignOut(c echo.Context)
 	deleteUser(c echo.Context) error
-	GetNotice(c echo.Context)
-	GetComplaints(c echo.Context)
 }
 
 //Get main Get
@@ -57,7 +53,7 @@ func Signup(c echo.Context) (err error) {
 		return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/login.html")
 	}
 
-	defer collection.Database().Client().Disconnect(context.TODO()) //가장 마지막에 호출 DB연결 끊기
+	defer collection.Database().Client().Disconnect(context.TODO()) //가장 마지막에 호출 (DB연결 끊기)
 
 	return c.JSON(http.StatusCreated, u)
 }
