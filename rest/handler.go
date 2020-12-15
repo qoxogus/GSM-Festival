@@ -13,15 +13,11 @@ import (
 )
 
 type handlerInterface interface {
-	GetScore(c echo.Context)
-	ReceiveScore(c echo.Context)
 	Login(c echo.Context) error
 	Signup(c echo.Context) error
 	updateUser(c echo.Context) error
 	SignOut(c echo.Context)
 	deleteUser(c echo.Context) error
-	GetNotice(c echo.Context)
-	GetComplaints(c echo.Context)
 }
 
 //Get main Get
