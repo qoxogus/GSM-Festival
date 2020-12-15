@@ -7,7 +7,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
-	dblayer "github.com/qoxogus/GSM-Festival-Master-Back/dbconn"
+	dblayer "github.com/qoxogus/GSM-Festival-Master-Back/dbconn" //dblayer 는 라이브러리 인듯함
 	"github.com/qoxogus/GSM-Festival-Master-Back/model"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -46,6 +46,8 @@ func Signup(c echo.Context) (err error) {
 	if err != nil {
 		return err
 	}
+	// u.Password = getHash([]byte(u.Password))
+
 	// Validate
 	if u.Email == "" || u.Password == "" {
 		return &echo.HTTPError{Code: http.StatusBadRequest, Message: "invalid email or password"}
@@ -66,12 +68,16 @@ func Signin(c echo.Context) (err error) {
 		return
 	}
 
+	// email := bson.M{"email": u.Email}
+	// password := bson.M{"password": u.Password}
 	filter := bson.M{"token": u.Token}
+
 	collection, err := dblayer.GetDBCollection()
 	if err != nil {
 		return err
 		// return &echo.HTTPError{Code: http.StatusUnauthorized,Message:"invalid email or password"}
 	}
+
 	err = collection.FindOne(context.TODO(), filter).Decode(&u)
 
 	_, err = collection.UpdateOne(context.TODO(), filter, &u)
@@ -92,12 +98,28 @@ func Signin(c echo.Context) (err error) {
 		return err
 	}
 
+	// _, err := collection.FindOne(u.ID, u.Password).Decode(&u)
+	// if err != nil {
+	// 	return c.JSON(400, map[string]interface{}{
+	// 		"status":  400,
+	// 		"message": "해당 정보에 맞는 유저가 없습니다",
+	// 	})
+	// }
+	// accessToken, err := lib.CreateAccessToken(u.ID, u.Password)
+	// if err != nil {
+	// 	return c.JSON(500, map[string]interface{}{
+	// 		"status":  500,
+	// 		"message": "토큰 생성 중 오류",
+	// 	})
+	// }
+	// return c.JSON(200, map[string]interface{}{
+	// 	"status":      200,
+	// 	"message":     "로그인 성공",
+	// 	"accessToken": accessToken,
+	// })
+
 	u.Password = "" // Don't send password
 
 	return c.JSON(http.StatusOK, u)
 	// return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/index.html")
 }
-
-// 공부
-// 열심히 근데 너무 어려워
-// 너무어려워
