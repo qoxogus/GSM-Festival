@@ -13,7 +13,7 @@ func GetDBCollection() (*mongo.Collection, error) {
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 
 	// Connect to MongoDB (연결)
-	fmt.Println("MongoDB Connect")
+	fmt.Println("[MongoDB Connect]")
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		return nil, err
