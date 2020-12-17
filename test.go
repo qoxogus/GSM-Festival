@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 )
 
 func signup(c echo.Context) error {
@@ -33,12 +32,12 @@ func login(c echo.Context) error {
 	return c.File("C:/Users/user/go/src/Gsmfestival-Master/index.html")
 }
 
-func main() {
-	tmp := "C:/Users/user/go/src/Gsmfestival-Master"
-	e := echo.New()
-	e.Use(middleware.Static(tmp))
-	e.POST("/signup", signup)
-	e.POST("/login", login)
-	e.Logger.Fatal(e.Start(":1325"))
+// func main() {
+// 	tmp := "C:/Users/user/go/src/Gsmfestival-Master"
+// 	e := echo.New()
+// 	e.Use(middleware.Static(tmp))
+// 	e.POST("/signup", signup)
+// 	e.POST("/login", login)
+// 	e.Logger.Fatal(e.Start(":1325"))
 
-}
+// }

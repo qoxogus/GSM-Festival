@@ -32,7 +32,7 @@ type database struct {
 
 // InitConfig Config 데이터 초기화
 func InitConfig() {
-	configBytes, err := ioutil.ReadFile("./config.toml")
+	configBytes, err := ioutil.ReadFile("config/config.toml")
 	if err != nil {
 		panic(err)
 	}
