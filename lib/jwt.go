@@ -15,10 +15,10 @@ type jwtMethod interface {
 }
 
 // CreateRefreshToken : Middleware that create RefreshToken
-func CreateRefreshToken(Id, Pw string) (string, error) {
+func CreateRefreshToken(Email, Pw string) (string, error) {
 	refreshToken := jwt.New(jwt.SigningMethodHS256)
 	claims := refreshToken.Claims.(jwt.MapClaims)
-	claims["ID"] = Id //ID들은 DB에서 지정된 ID?
+	claims["Email"] = Email
 	claims["Pw"] = Pw
 	claims["exp"] = time.Now().Add(time.Hour * 720).Unix()
 
@@ -30,10 +30,10 @@ func CreateRefreshToken(Id, Pw string) (string, error) {
 }
 
 // CreateAccessToken : Middleware that create AccessToken
-func CreateAccessToken(Id, Pw string, IsManager bool) (string, error) {
+func CreateAccessToken(Email, Pw string, IsManager bool) (string, error) {
 	accessToken := jwt.New(jwt.SigningMethodHS256)
 	claims := accessToken.Claims.(jwt.MapClaims)
-	claims["ID"] = Id
+	claims["Email"] = Email
 	claims["Pw"] = Pw
 	claims["IsManager"] = IsManager
 	claims["exp"] = time.Now().Add(time.Hour * 1).Unix()
@@ -49,9 +49,9 @@ func VerifyRefreshToken(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		token := c.Get("user").(*jwt.Token)
 		claims := token.Claims.(jwt.MapClaims)
-		ID := claims["ID"].(string)
+		Email := claims["Email"].(string)
 		Pw := claims["Pw"].(string)
-		c.Set("ID", ID)
+		c.Set("Email", Email)
 		c.Set("Pw", Pw)
 		return next(c)
 	}
@@ -62,10 +62,10 @@ func VerifyAccessToken(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		token := c.Get("user").(*jwt.Token)
 		claims := token.Claims.(jwt.MapClaims)
-		ID := claims["ID"].(string)
+		Email := claims["Email"].(string)
 		Pw := claims["Pw"].(string)
 		IsManager := claims["IsManager"].(bool)
-		c.Set("ID", ID)
+		c.Set("Email", Email)
 		c.Set("Pw", Pw)
 		c.Set("IsManager", IsManager)
 		return next(c)

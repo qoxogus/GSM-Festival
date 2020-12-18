@@ -20,14 +20,7 @@ func GetMainPage(c echo.Context) (err error) {
 	return c.File("C:/Users/user/go/src/Gsmfestival-Master-Front/index.html")
 }
 
-//Login Get
-// func Loginpage(c echo.Context) (err error) {
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return c.Render(http.StatusOK, )
-// }
-
+//S
 type SignUpParam struct {
 	Classnum  string `json:"classnum" form:"classnum" query:"classnum"`
 	Name      string `json:"name" form:"name" query:"name"`
@@ -42,7 +35,7 @@ func Signup(c echo.Context) (err error) {
 	if err := c.Bind(u); err != nil {
 		return err
 	}
-	if u.Classnum == "" || u.Name == "" || u.Pw == "" {
+	if u.Classnum == "" || u.Name == "" || u.Email == "" || u.Pw == "" {
 		return c.JSON(400, map[string]interface{}{
 			"status":  400,
 			"message": "모든 값을 입력해주세요",
@@ -71,6 +64,7 @@ func Signup(c echo.Context) (err error) {
 	})
 }
 
+//S
 type SignInParam struct {
 	Email string `json:"email" form:"email" query:"email"`
 	Pw    string `json:"pw" form:"pw" query:"pw"`
@@ -78,42 +72,6 @@ type SignInParam struct {
 
 //Get signin page
 func Signin(c echo.Context) (err error) {
-	// Bind
-	// mu := new(model.User) //user 불러오기
-	// if err = c.Bind(mu); err != nil {
-	// 	return
-	// }
-
-	// // // email := bson.M{"email": u.Email}
-	// // // password := bson.M{"password": u.Password}
-	// filter := bson.M{"token": mu.Token}
-
-	// collection, err := dblayer.GetDBCollection()
-	// if err != nil {
-	// 	return err
-	// 	// return &echo.HTTPError{Code: http.StatusUnauthorized,Message:"invalid email or password"}
-	// }
-
-	// err = collection.FindOne(context.TODO(), filter).Decode(&u)
-
-	// _, err = collection.UpdateOne(context.TODO(), filter, &u)
-
-	// defer collection.Database().Client().Disconnect(context.TODO())
-
-	// // Create token
-	// token := jwt.New(jwt.SigningMethodHS256)
-
-	// // Set claims
-	// claims := token.Claims.(jwt.MapClaims)
-	// claims["id"] = u.ID
-	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix()
-
-	// // Generate encoded token and send it as response
-	// u.Token, err = token.SignedString([]byte("secret"))
-	// if err != nil {
-	// 	return err
-	// }
-
 	u := new(SignInParam)
 	if err := c.Bind(u); err != nil {
 		return err
@@ -152,6 +110,41 @@ func Signin(c echo.Context) (err error) {
 		"refreshToken": refreshToken,
 		"accessToken":  accessToken,
 	})
+	// Bind
+	// mu := new(model.User) //user 불러오기
+	// if err = c.Bind(mu); err != nil {
+	// 	return
+	// }
+
+	// // // email := bson.M{"email": u.Email}
+	// // // password := bson.M{"password": u.Password}
+	// filter := bson.M{"token": mu.Token}
+
+	// collection, err := dblayer.GetDBCollection()
+	// if err != nil {
+	// 	return err
+	// 	// return &echo.HTTPError{Code: http.StatusUnauthorized,Message:"invalid email or password"}
+	// }
+
+	// err = collection.FindOne(context.TODO(), filter).Decode(&u)
+
+	// _, err = collection.UpdateOne(context.TODO(), filter, &u)
+
+	// defer collection.Database().Client().Disconnect(context.TODO())
+
+	// // Create token
+	// token := jwt.New(jwt.SigningMethodHS256)
+
+	// // Set claims
+	// claims := token.Claims.(jwt.MapClaims)
+	// claims["id"] = u.ID
+	// claims["exp"] = time.Now().Add(time.Hour * 1).Unix()
+
+	// // Generate encoded token and send it as response
+	// u.Token, err = token.SignedString([]byte("secret"))
+	// if err != nil {
+	// 	return err
+	// }
 }
 
 //Loginpage
