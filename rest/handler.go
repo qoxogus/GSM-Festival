@@ -17,7 +17,7 @@ type handlerInterface interface {
 //Get main Get
 func GetMainPage(c echo.Context) (err error) {
 	// return c.String(200, "main page")
-	return c.File("/Users/baetaehyeon/go/src/Gsmfestival-Master-Front/login.html")
+	return c.File("/Users/baetaehyeon/go/src/Gsmfestival-Master-Front/index.html")
 }
 
 //S
@@ -147,6 +147,7 @@ func Signin(c echo.Context) (err error) {
 	// }
 }
 
+//Classroom in use page
 func Classroominuse(c echo.Context) (err error) {
 	if err != nil {
 		return err
