@@ -19,6 +19,7 @@ func RunAPI(address string) {
 	e.GET("/login", Loginpage)
 	e.GET("/signup", Signuppage)
 	e.GET("/application", Applicationpage)
+	e.GET("/classroominuse", Classroominuse)
 
 	e.POST("/loginpage", Signup)
 	e.POST("/main", Signin)

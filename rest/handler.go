@@ -17,7 +17,7 @@ type handlerInterface interface {
 //Get main Get
 func GetMainPage(c echo.Context) (err error) {
 	// return c.String(200, "main page")
-	return c.File("/Gsmfestival-Master-Front/index.html")
+	return c.File("/Users/baetaehyeon/go/src/Gsmfestival-Master-Front/login.html")
 }
 
 //S
@@ -147,12 +147,19 @@ func Signin(c echo.Context) (err error) {
 	// }
 }
 
+func Classroominuse(c echo.Context) (err error) {
+	if err != nil {
+		return err
+	}
+	return c.File("/Users/baetaehyeon/go/src/Gsmfestival-Master-Front/admin.html")
+}
+
 //Loginpage
 func Loginpage(c echo.Context) (err error) {
 	if err != nil {
 		return err
 	}
-	return c.File("/Gsmfestival-Master-Front/login.html")
+	return c.File("/Users/baetaehyeon/go/src/Gsmfestival-Master-Front/login.html")
 }
 
 //Signuppage
@@ -160,7 +167,7 @@ func Signuppage(c echo.Context) (err error) {
 	if err != nil {
 		return err
 	}
-	return c.File("/Gsmfestival-Master-Front/signup.html")
+	return c.File("/Users/baetaehyeon/go/src/Gsmfestival-Master-Front/signup.html")
 }
 
 //Applicationpage
@@ -168,5 +175,5 @@ func Applicationpage(c echo.Context) (err error) {
 	if err != nil {
 		return err
 	}
-	return c.File("/Gsmfestival-Master-Front/submit.html")
+	return c.File("/Users/baetaehyeon/go/src/Gsmfestival-Master-Front/submit.html")
 }
